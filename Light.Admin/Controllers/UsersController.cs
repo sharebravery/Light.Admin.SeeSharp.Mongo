@@ -18,6 +18,10 @@ namespace Light.Admin.Controllers
             userCollection = db.GetCollection<User>(typeof(User).Name);
         }
 
+        /// <summary>
+        /// 条件查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Get()
         {
@@ -25,6 +29,10 @@ namespace Light.Admin.Controllers
             return Ok(all.ToList());
         }
 
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        /// <param name="user"></param>
         [HttpPost]
         public async void Post(User user)
         {

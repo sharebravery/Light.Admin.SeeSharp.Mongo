@@ -2,6 +2,7 @@
 using Light.Framework.Models;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel;
 
 namespace Light.Admin.CSharp.Models
 {
@@ -21,6 +22,7 @@ namespace Light.Admin.CSharp.Models
         /// <summary>
         /// 软删除
         /// </summary>
+        [DefaultValue(true)]
         public bool Deleted { get; set; }
 
         /// <summary>

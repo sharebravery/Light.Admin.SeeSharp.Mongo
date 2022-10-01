@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Light.Admin</name>
+    </assembly>
+    <members>
+        <member name="M:Light.Admin.Controllers.UsersController.Get">
+            <summary>
+            条件查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Light.Admin.Controllers.UsersController.Post(Light.Admin.CSharp.Models.User)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.UserName">
+            <summary>
+            用户名/账号
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.NickName">
+            <summary>
+            用户名（显示名称）
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.ConfirmPassword">
+            <summary>
+            再次输入密码
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.PhoneNumber">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.PhoneNumberConfirmed">
+            <summary>
+            手机号码是否已验证
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.EmailConfirmed">
+            <summary>
+            邮件是否已验证
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.LockoutEnabled">
+            <summary>
+            锁定
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.LockoutEnd">
+            <summary>
+            账号自动解锁时间
+            </summary>  
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Roles">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Dto.UserDto.Department">
+            <summary>
+            所属部门
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Models.User.Salt">
+            <summary>
+            加密盐
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Models.User.Deleted">
+            <summary>
+            软删除
+            </summary>
+        </member>
+        <member name="P:Light.Admin.CSharp.Models.User.IP">
+            <summary>
+            客户端IP
+            </summary>
+        </member>
+    </members>
+</doc>
