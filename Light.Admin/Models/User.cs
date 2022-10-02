@@ -1,4 +1,4 @@
-﻿using Light.Admin.CSharp.Dto;
+﻿using Light.Admin.CSharp.Dtos;
 using Light.Framework.Models;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
@@ -22,7 +22,7 @@ namespace Light.Admin.CSharp.Models
         /// <summary>
         /// 软删除
         /// </summary>
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool Deleted { get; set; }
 
         /// <summary>

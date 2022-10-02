@@ -1,4 +1,4 @@
-﻿namespace Light.Admin.CSharp.Dto
+﻿namespace Light.Admin.CSharp.Dtos
 {
     public class UserDto
     {

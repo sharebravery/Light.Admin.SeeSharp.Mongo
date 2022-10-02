@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj",
+      "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj",
       "projectName": "Light.Framework",
-      "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj",
+      "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\obj\\",
+      "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

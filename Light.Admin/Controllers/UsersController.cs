@@ -1,5 +1,8 @@
-﻿using Light.Admin.CSharp.Models;
+﻿using AutoMapper;
+using Light.Admin.CSharp.Dtos;
+using Light.Admin.CSharp.Models;
 using Light.Admin.Database;
+using Light.Admin.IServices;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
@@ -10,33 +13,35 @@ namespace Light.Admin.Controllers
     public class UsersController : ControllerBase
     {
 
-        private readonly IMongoDBContext db;
-        protected IMongoCollection<User> userCollection;
-        public UsersController(IMongoDBContext db)
+        private readonly IUsersService userService;
+
+        public UsersController(IUsersService userService)
         {
-            this.db = db;
-            userCollection = db.GetCollection<User>(typeof(User).Name);
+            this.userService = userService;
         }
 
         /// <summary>
         /// 条件查询
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="name"></param>
+        /// <param name="phoneNumber"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
+        public async Task<ActionResult<IEnumerable<User>>> Find(string username, string name, string phoneNumber)
         {
-            var all = await userCollection.FindAsync(Builders<User>.Filter.Empty);
-            return Ok(all.ToList());
+            return Ok(await userService.Find(username, name, phoneNumber));
         }
 
         /// <summary>
         /// 新增用户
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async void Post(User user)
+        public async Task<string> Create(UserDto dto)
         {
-             await userCollection.InsertOneAsync(user);
+            return await userService.Create(dto);
         }
     }
 }

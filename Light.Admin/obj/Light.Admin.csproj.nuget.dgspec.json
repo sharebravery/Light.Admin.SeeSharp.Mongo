@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Admin\\Light.Admin.csproj": {}
+    "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj": {}
   },
   "projects": {
-    "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Admin\\Light.Admin.csproj": {
+    "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Admin\\Light.Admin.csproj",
+        "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj",
         "projectName": "Light.Admin",
-        "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Admin\\Light.Admin.csproj",
+        "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Admin\\obj\\",
+        "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj": {
-                "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj"
+              "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj": {
+                "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj"
               }
             }
           }
@@ -45,6 +45,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
@@ -91,14 +99,14 @@
         }
       }
     },
-    "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj": {
+    "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj",
+        "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj",
         "projectName": "Light.Framework",
-        "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj",
+        "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\Light.Framework.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\obj\\",
+        "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Framework\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

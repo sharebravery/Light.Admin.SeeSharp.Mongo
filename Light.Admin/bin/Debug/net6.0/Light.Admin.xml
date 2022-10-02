@@ -10,78 +10,78 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Light.Admin.Controllers.UsersController.Post(Light.Admin.CSharp.Models.User)">
+        <member name="M:Light.Admin.Controllers.UsersController.Post(Light.Admin.CSharp.Dtos.UserDto)">
             <summary>
             新增用户
             </summary>
             <param name="user"></param>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.UserName">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.UserName">
             <summary>
             用户名/账号
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.NickName">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.NickName">
             <summary>
             用户名（显示名称）
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Password">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Password">
             <summary>
             密码
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.ConfirmPassword">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.ConfirmPassword">
             <summary>
             再次输入密码
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Email">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Email">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.PhoneNumber">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.PhoneNumber">
             <summary>
             手机号码
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.PhoneNumberConfirmed">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.PhoneNumberConfirmed">
             <summary>
             手机号码是否已验证
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.EmailConfirmed">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.EmailConfirmed">
             <summary>
             邮件是否已验证
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Gender">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Gender">
             <summary>
             性别
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Age">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Age">
             <summary>
             年龄
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.LockoutEnabled">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.LockoutEnabled">
             <summary>
             锁定
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.LockoutEnd">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.LockoutEnd">
             <summary>
             账号自动解锁时间
             </summary>  
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Roles">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Roles">
             <summary>
             角色
             </summary>
         </member>
-        <member name="P:Light.Admin.CSharp.Dto.UserDto.Department">
+        <member name="P:Light.Admin.CSharp.Dtos.UserDto.Department">
             <summary>
             所属部门
             </summary>
@@ -100,6 +100,33 @@
             <summary>
             客户端IP
             </summary>
+        </member>
+        <member name="M:Light.Admin.IServices.IUsersService.Create(Light.Admin.CSharp.Dtos.UserDto)">
+            <summary>
+            创建、注册用户
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Light.Admin.IServices.IUsersService.Update(Light.Admin.CSharp.Dtos.UserDto)">
+            <summary>
+            更新
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Light.Admin.IServices.IUsersService.Find(System.String,System.String,System.String)">
+            <summary>
+            条件查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Light.Admin.IServices.IUsersService.FindOne(System.String)">
+            <summary>
+            根据id查找
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

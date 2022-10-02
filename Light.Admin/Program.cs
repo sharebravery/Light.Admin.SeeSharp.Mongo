@@ -12,6 +12,8 @@ builder.Services.Configure<MongoDBSettings>(
 
 builder.Services.AddSingleton<IMongoDBContext, MongoDBContext>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddControllers();
 //.AddJsonOptions(
 //    options =>{

@@ -59,3 +59,5 @@ E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\bin\Debug\net6.0\Humanizer.
 E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\bin\Debug\net6.0\Light.Admin.xml
 E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\obj\Debug\net6.0\Light.Admin.xml
+E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\bin\Debug\net6.0\AutoMapper.dll
+E:\Volunteer\Calculus\Light.Admin.CSharp\Light.Admin\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
