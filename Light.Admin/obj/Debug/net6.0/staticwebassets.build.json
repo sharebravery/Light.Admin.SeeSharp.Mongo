@@ -1,23 +1,11 @@
 {
   "Version": 1,
-  "Hash": "Rb7PzdaNUN7p4YNtaEbXVTQ3TyYniwb0RjQSpB8btpg=",
+  "Hash": "1qkGxmum2bJPSd0En/3cQ97ruWyQ+T5ytPFTaAL4UpU=",
   "Source": "Light.Admin",
   "BasePath": "_content/Light.Admin",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "E:\\Volunteer\\Calculus\\Light.Admin.CSharp\\Light.Framework\\Light.Framework.csproj",
-      "Version": 2,
-      "Source": "Light.Framework",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
   "Assets": []
 }

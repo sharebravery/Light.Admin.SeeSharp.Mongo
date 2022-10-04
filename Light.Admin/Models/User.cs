@@ -1,18 +1,21 @@
-﻿using Light.Admin.CSharp.Dtos;
-using Light.Framework.Models;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Identity;
+using Light.Admin.Interfaces;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Light.Admin.CSharp.Models
+namespace Light.Admin.Models
 {
-    public class User : UserDto
+    public class User : IdentityUser<ObjectId>, IAuditMetadata
     {
+        /// <summary>
+        ///  元数据
+        /// </summary>
         public AuditMetadata AuditMetadata { get; set; }
 
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
+        //public string? Id { get; set; }
 
         /// <summary>
         /// 加密盐

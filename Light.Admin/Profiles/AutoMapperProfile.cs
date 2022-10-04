@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Light.Admin.CSharp.Dtos;
-using Light.Admin.CSharp.Models;
+using Light.Admin.Dtos;
+using Light.Admin.Models;
 
 namespace Light.Admin.Profiles
 {
@@ -8,7 +8,8 @@ namespace Light.Admin.Profiles
     {
         public AutoMapperProfile()
         {
-            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<UserCreateDto, User>().ReverseMap();
+            //CreateMap<UserDto, User>().ReverseMap();
         }
 
     }

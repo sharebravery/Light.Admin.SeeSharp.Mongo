@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Light.Admin", "Light.Admin\Light.Admin.csproj", "{903D5032-F609-4EAE-A2A8-B85D7617773E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Light.Framework", "Light.Framework\Light.Framework.csproj", "{5E483B5E-71A5-4C01-A03C-B245FC8733C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Light.Admin", "Light.Admin\Light.Admin.csproj", "{903D5032-F609-4EAE-A2A8-B85D7617773E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{903D5032-F609-4EAE-A2A8-B85D7617773E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{903D5032-F609-4EAE-A2A8-B85D7617773E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{903D5032-F609-4EAE-A2A8-B85D7617773E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E483B5E-71A5-4C01-A03C-B245FC8733C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E483B5E-71A5-4C01-A03C-B245FC8733C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E483B5E-71A5-4C01-A03C-B245FC8733C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E483B5E-71A5-4C01-A03C-B245FC8733C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

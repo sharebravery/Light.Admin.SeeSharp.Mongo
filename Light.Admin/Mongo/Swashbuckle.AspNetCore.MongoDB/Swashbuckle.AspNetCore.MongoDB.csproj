@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<NoWarn>1591</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Version>22.7.14.1</Version>
+		<Authors>ch2lab.cn</Authors>
+		<Company>ch2lab</Company>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<Target Name="Push-Package" AfterTargets="Pack" Condition="'$(Configuration)' == 'Release'">
+		<Exec Command="dotnet nuget push &quot;$(OutputPath).\$(PackageId).$(PackageVersion).nupkg&quot; --skip-duplicate" />
+	</Target>	
+
+	<ItemGroup>
+		<PackageReference Include="MongoDB.Bson" Version="2.16.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.2" />
+	</ItemGroup>
+	
+</Project>
