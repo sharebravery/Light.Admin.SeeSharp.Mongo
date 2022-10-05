@@ -26,7 +26,7 @@ namespace LightForApiDotNet5.Tools
             else
             {
                 var objectResult = context.Result as ObjectResult;
-                context.Result = new OkObjectResult(new BaseResultModel(code: 200, data: objectResult.Value));
+                context.Result = new OkObjectResult(new BaseResultModel(code: 200, data: objectResult == null ? null : objectResult.Value));
             }
         }
 

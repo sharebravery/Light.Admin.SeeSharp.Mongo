@@ -15,7 +15,6 @@ namespace Light.Admin.Database
 
             _db = _mongoClient.GetDatabase(configuration.Value.DatabaseName);
         }
-
         public IMongoCollection<T> GetCollection<T>(string name)
         {
             return _db.GetCollection<T>(name);

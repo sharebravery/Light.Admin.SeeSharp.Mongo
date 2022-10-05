@@ -9,10 +9,16 @@ namespace Light.Admin.Mongo.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            //if (!context.ModelState.IsValid)
-            //{
-            //context.Result = new ValidationFailedResult(context);
-            //}
+            base.OnActionExecuting(context);
         }
+
+        //public override void OnActionExecuting(ActionExecutingContext context)
+        //{
+        //    if (!context.ModelState.IsValid)
+        //    {
+        //        //context.Result = new ValidationFailedResult(context);
+        //    }
+        //}
     }
+
 }
