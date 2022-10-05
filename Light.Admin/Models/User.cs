@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 using Light.Admin.Interfaces;
-using MongoDB.Bson.Serialization.Attributes;
+using Light.Admin.Models.Basics;
 
 namespace Light.Admin.Models
 {
@@ -13,20 +13,10 @@ namespace Light.Admin.Models
         /// </summary>
         public AuditMetadata AuditMetadata { get; set; }
 
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
-        //public string? Id { get; set; }
-
         /// <summary>
         /// 加密盐
         /// </summary>
         public string Salt { get; set; }
-
-        /// <summary>
-        /// 软删除
-        /// </summary>
-        [DefaultValue(false)]
-        public bool Deleted { get; set; }
 
         /// <summary>
         /// 客户端IP

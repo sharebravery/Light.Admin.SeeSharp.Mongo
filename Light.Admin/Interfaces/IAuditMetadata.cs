@@ -1,4 +1,4 @@
-﻿using Light.Admin.Models;
+﻿using Light.Admin.Models.Basics;
 
 namespace Light.Admin.Interfaces
 {

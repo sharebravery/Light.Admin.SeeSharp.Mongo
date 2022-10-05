@@ -112,11 +112,6 @@
             加密盐
             </summary>
         </member>
-        <member name="P:Light.Admin.Models.User.Deleted">
-            <summary>
-            软删除
-            </summary>
-        </member>
         <member name="P:Light.Admin.Models.User.IP">
             <summary>
             客户端IP

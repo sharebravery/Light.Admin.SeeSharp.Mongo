@@ -7,6 +7,7 @@ namespace Light.Admin.Dtos
         /// <summary>
         ///     用户名
         /// </summary>
+        [Required(ErrorMessage = "用户名称不能为空")]
         public string UserName { get; set; } = string.Empty;
 
         /// <summary>

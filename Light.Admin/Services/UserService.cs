@@ -67,7 +67,7 @@ namespace Light.Admin.Services
             user.UserName = dto.UserName;
             user.Email = dto.Email;
 
-            userCollection.ReplaceOneAsync(x => x.Id == id, user);
+            await userCollection.ReplaceOneAsync(x => x.Id == id, user);
 
             return new UserViewModel(user);
         }
@@ -81,6 +81,14 @@ namespace Light.Admin.Services
         /// <returns></returns>
         public async Task<List<UserViewModel>> FindAsync(string? userName, string? name, string? phoneNumber)
         {
+            var fb = Builders<User>.Filter;
+            var result = await userCollection.FindAsync(
+                fb.Where(p => p.UserName.Contains(userName!)).If(userName) &
+                fb.Where(P => P.NormalizedUserName.Contains(name!)).If(name) &
+                fb.Where(p => p.PhoneNumber.Contains(phoneNumber!)).If(phoneNumber));
+
+            return result.ToList().Select(t => new UserViewModel(t)).ToList();
+
             var all = await userCollection.FindAsync(Builders<User>.Filter.Empty);
 
             return all.ToList().Select(t => new UserViewModel(t)).ToList();
@@ -95,6 +103,8 @@ namespace Light.Admin.Services
         {
             var user = await userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+            if (user == null) return null;
+
             return new UserViewModel(user);
         }
 
@@ -105,9 +115,12 @@ namespace Light.Admin.Services
         /// <returns></returns>
         public async Task DeleteAsync(IEnumerable<ObjectId> ids)
         {
-            var list = ids.ToList().Select((id) => id);
-            var update = Builders<User>.Update.Set(p => p.Deleted, true);
-            await userCollection.UpdateManyAsync(p => list.Contains(p.Id), update);
+            //var update = Builders<User>.Update.Set(p => p.DeletedAt, true);
+            //await userCollection.UpdateManyAsync(p => ids.Contains(p.Id), update);
+
+            var res = await userCollection.DeleteManyAsync(p => ids.Contains(p.Id));
+
+            if (res.DeletedCount == 0) throw new ArgumentException("删除失败");
         }
     }
 }

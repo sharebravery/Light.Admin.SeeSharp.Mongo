@@ -1,4 +1,5 @@
 ﻿using Light.Admin.Models;
+using Light.Admin.Models.Basics;
 using MongoDB.Bson;
 
 namespace Light.Admin.ViewModels

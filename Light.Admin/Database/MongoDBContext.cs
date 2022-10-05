@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Light.Admin.Database
-{ 
+{
     public class MongoDBContext : IMongoDBContext
     {
         private IMongoDatabase _db { get; set; }
@@ -20,6 +20,6 @@ namespace Light.Admin.Database
         {
             return _db.GetCollection<T>(name);
         }
-       
+
     }
 }

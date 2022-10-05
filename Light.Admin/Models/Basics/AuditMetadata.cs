@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Light.Admin.Models
+namespace Light.Admin.Models.Basics
 {
     //
     // Summary:
@@ -27,5 +27,10 @@ namespace Light.Admin.Models
         // Summary:
         //     修改时间
         public virtual DateTime ModifiedOn { get; set; } = DateTime.Now;
+
+        //
+        // Summary:
+        //     软删除
+        public virtual DateTime DeletedOn { get; set; }
     }
 }

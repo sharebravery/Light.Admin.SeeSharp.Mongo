@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Light.Admin.Mongo.Extensions
 {
-    public static class ServiceCollectionExtensions
+    public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddObjectIdBinders(this IServiceCollection services)
         {

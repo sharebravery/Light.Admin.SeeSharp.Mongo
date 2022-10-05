@@ -1,20 +1,16 @@
 using Light.Admin.Database;
 using Light.Admin.IServices;
 using Light.Admin.Services;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using MongoDB.Bson;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Any;
-using MongoDB.Driver;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Light.Admin.Mongo.Extensions;
+using Microsoft.AspNetCore.Builder;
+using LightForApiDotNet5.Tools;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc;
+using Light.Admin.Mongo.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +33,34 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
+//.AddXmlDataContractSerializerFormatters()
+//.ConfigureApiBehaviorOptions(setupAction =>
+//{
+//    setupAction.InvalidModelStateResponseFactory = context =>
+//    {
+//        // 422 验证错误统一处理(模型校验错误)
+//        var problemDetail = new ValidationProblemDetails(context.ModelState)
+//        {
+//            Type = "无所谓",
+//            Title = "数据验证失败",
+//            Status = StatusCodes.Status422UnprocessableEntity,
+//            Detail = "请看详细说明",
+//            Instance = context.HttpContext.Request.Path
+//        };
+//        problemDetail.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+//        return new UnprocessableEntityObjectResult(problemDetail)
+//        {
+//            ContentTypes = { "application/problem+json" }
+//        };
+//    };
+//});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddMvc(options =>
+{
+    //options.Filters.Add<ValidateModelAttribute>();
+    options.Filters.Add<ApiResultFilterAttribute>(); // 统一返回值
+});
 
 builder.Services.AddObjectIdBinders(); // support query can use ObjectId
 
@@ -55,7 +78,6 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddObjectIdSwagger();
 
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -66,11 +88,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-//builder.Services.AddTransient(sp => sp.GetService<IOptions<JsonOptions>>()!.Value.JsonSerializerOptions); // X
-
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

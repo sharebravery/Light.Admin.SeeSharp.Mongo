@@ -1,4 +1,4 @@
-﻿namespace Light.Admin.Models
+﻿namespace Light.Admin.Models.Basics
 {
     //
     // 摘要:
