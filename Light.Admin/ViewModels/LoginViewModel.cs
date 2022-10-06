@@ -1,16 +1,21 @@
-﻿namespace Light.Admin.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Light.Admin.ViewModels
 {
-    public class Login
+    public class LoginViewModel
     {
         /// <summary>
         /// 账户
         /// </summary>
+        [Required]
         public string Account { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
+        [Required]
         public string Password { get; set; }
 
+        public bool RememberMe { get; set; }
     }
 }

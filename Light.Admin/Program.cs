@@ -9,11 +9,10 @@ using LightForApiDotNet5.Tools;
 using Light.Admin.Mongo.Filters;
 using Light.Admin.Models;
 using AspNetCore.Identity.Mongo;
-using Microsoft.Extensions.Options;
-using AspNetCore.Identity.Mongo.Model;
 using MongoDB.Bson;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,11 +38,7 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<ApiResultFilterAttribute>(); // 统一返回值（包含了对422模型校验错误的处理）
-    options.Filters.Add<CustomExceptionAttribute>(); // 统一异常处理
-});
+
 
 builder.Services.AddObjectIdBinders(); // support query can use ObjectId
 
@@ -95,7 +90,27 @@ builder.Services.AddIdentityMongoDbProvider<User, Role, ObjectId>(identity =>
        // other options
    });
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("JwtSettings", options))
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("CookieSettings", options));
 
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add<ApiResultFilterAttribute>(); // 统一返回值（包含了对422模型校验错误的处理）
+    options.Filters.Add<CustomExceptionAttribute>(); // 统一异常处理
+});
+
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+//builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -109,7 +124,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 

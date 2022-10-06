@@ -5,6 +5,7 @@ using Light.Admin.IServices;
 using Light.Admin.Models;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -30,7 +31,6 @@ namespace Light.Admin.Services
         {
             var user = mapper.Map<User>(dto);
             await userCollection.InsertOneAsync(user);
-
         }
 
         /// <summary>

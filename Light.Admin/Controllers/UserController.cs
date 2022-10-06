@@ -5,6 +5,7 @@ using Light.Admin.IServices;
 using Light.Admin.Models;
 using Light.Admin.Services;
 using Light.Admin.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -14,15 +15,23 @@ namespace Light.Admin.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
         private readonly UserManager<User> userManager;
+        private readonly IHttpContextAccessor accessor;
 
-        public UserController(IUserService userService, UserManager<User> userManager)
+
+        public UserController(
+            IUserService userService,
+            UserManager<User> userManager,
+            IHttpContextAccessor accessor
+            )
         {
             this.userService = userService;
             this.userManager = userManager;
+            this.accessor = accessor;
         }
 
 
@@ -38,7 +47,8 @@ namespace Light.Admin.Controllers
             {
                 UserName = dto.UserName,
                 PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email
+                Email = dto.Email,
+                //IP = ip
             };
 
             ModelState.ToString();

@@ -86,16 +86,6 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="P:Light.Admin.Models.Login.Account">
-            <summary>
-            账户
-            </summary>
-        </member>
-        <member name="P:Light.Admin.Models.Login.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
         <member name="P:Light.Admin.Models.User.AuditMetadata">
             <summary>
              元数据
@@ -148,6 +138,16 @@
             </summary>
             <param name="ids"></param>
             <returns></returns>
+        </member>
+        <member name="P:Light.Admin.ViewModels.LoginViewModel.Account">
+            <summary>
+            账户
+            </summary>
+        </member>
+        <member name="P:Light.Admin.ViewModels.LoginViewModel.Password">
+            <summary>
+            密码
+            </summary>
         </member>
         <member name="P:Light.Admin.ViewModels.UserViewModel.AuditMetadata">
             <summary>
