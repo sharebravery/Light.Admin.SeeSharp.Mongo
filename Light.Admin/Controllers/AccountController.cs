@@ -1,22 +1,28 @@
 ﻿using AutoMapper;
 using Light.Admin.Database;
+using Light.Admin.Dtos;
 using Light.Admin.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
 namespace Light.Admin.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]/[action]")]
     public class AccountController : ControllerBase
     {
-        private readonly IMongoDBContext db;
+        //private readonly IDefaultDbContext db;
         protected IMongoCollection<User> userCollection;
         private readonly IMapper mapper;
-        public AccountController(IMongoDBContext db, IMapper mapper)
-        {
-            this.db = db;
-            userCollection = db.GetCollection<User>(typeof(User).Name);
-            this.mapper = mapper;
-        }
 
+        private readonly UserManager<User> userManager;
+        public AccountController(IMapper mapper, IMongoCollection<User> userCollection, UserManager<User> userManager)
+        {
+            //this.db = db;
+            this.userCollection = userCollection;
+            this.mapper = mapper;
+            this.userManager = userManager;
+        }
     }
 }

@@ -3,7 +3,9 @@ using Light.Admin.Database;
 using Light.Admin.Dtos;
 using Light.Admin.IServices;
 using Light.Admin.Models;
+using Light.Admin.Services;
 using Light.Admin.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -14,12 +16,75 @@ namespace Light.Admin.Controllers
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
-
         private readonly IUserService userService;
+        private readonly UserManager<User> userManager;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, UserManager<User> userManager)
         {
             this.userService = userService;
+            this.userManager = userManager;
+        }
+
+
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IdentityResult> Create(UserCreateDto dto)
+        {
+            var user = new User
+            {
+                UserName = dto.UserName,
+                PhoneNumber = dto.PhoneNumber,
+                Email = dto.Email
+            };
+
+            ModelState.ToString();
+
+            IdentityResult? result;
+
+            if (string.IsNullOrWhiteSpace(dto.Password))
+                result = await userManager.CreateAsync(user,
+                    new string(user.PhoneNumber.TakeLast(Math.Min(user.PhoneNumber.Length, 6)).ToArray()));
+            else
+                result = await userManager.CreateAsync(user, dto.Password);
+
+            if (result.Succeeded == false)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+            }
+
+
+            return result;
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task Update(ObjectId id, UserCreateDto dto)
+        {
+            await userService.UpdateAsync(id, dto);
+        }
+
+        ///// <summary>
+        ///// 批量删除
+        ///// </summary>
+        ///// <param name="ids"></param>
+        ///// <returns></returns>
+        [HttpPut]
+        public async Task Delete(ObjectId[] ids)
+        {
+            await userService.DeleteAsync(ids);
         }
 
         /// <summary>
@@ -35,44 +100,17 @@ namespace Light.Admin.Controllers
             return Ok(await userService.FindAsync(userName, name, phoneNumber));
         }
 
-        /// <summary>
-        /// 单个查找
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// 单个查找
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
         [HttpGet]
         public async Task<UserViewModel> FindOne(ObjectId id)
         {
             return await userService.FindOneAsync(id);
         }
 
-        /// <summary>
-        /// 新增用户
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task Create(UserCreateDto dto)
-        {
-            await userService.CreateAsync(dto);
-        }
-
-        [HttpPut]
-        public async Task Update(ObjectId id, UserCreateDto dto)
-        {
-            await userService.UpdateAsync(id, dto);
-        }
-
-        /// <summary>
-        /// 批量删除
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        [HttpPut]
-        public async Task Delete(ObjectId[] ids)
-        {
-            await userService.DeleteAsync(ids);
-        }
 
     }
 }

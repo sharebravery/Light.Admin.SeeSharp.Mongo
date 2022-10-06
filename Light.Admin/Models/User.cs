@@ -3,10 +3,11 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 using Light.Admin.Interfaces;
 using Light.Admin.Models.Basics;
+using AspNetCore.Identity.Mongo.Model;
 
 namespace Light.Admin.Models
 {
-    public class User : IdentityUser<ObjectId>, IAuditMetadata
+    public class User : MongoUser
     {
         /// <summary>
         ///  元数据

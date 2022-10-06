@@ -4,22 +4,6 @@
         <name>Light.Admin</name>
     </assembly>
     <members>
-        <member name="M:Light.Admin.Controllers.UserController.Find(System.String,System.String,System.String)">
-            <summary>
-            条件查询
-            </summary>
-            <param name="userName"></param>
-            <param name="name"></param>
-            <param name="phoneNumber"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Light.Admin.Controllers.UserController.FindOne(MongoDB.Bson.ObjectId)">
-            <summary>
-            单个查找
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="M:Light.Admin.Controllers.UserController.Create(Light.Admin.Dtos.UserCreateDto)">
             <summary>
             新增用户
@@ -27,11 +11,21 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
-        <member name="M:Light.Admin.Controllers.UserController.Delete(MongoDB.Bson.ObjectId[])">
+        <member name="M:Light.Admin.Controllers.UserController.Update(MongoDB.Bson.ObjectId,Light.Admin.Dtos.UserCreateDto)">
             <summary>
-            批量删除
+            更新
             </summary>
-            <param name="ids"></param>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Light.Admin.Controllers.UserController.Find(System.String,System.String,System.String)">
+            <summary>
+            条件查询
+            </summary>
+            <param name="userName"></param>
+            <param name="name"></param>
+            <param name="phoneNumber"></param>
             <returns></returns>
         </member>
         <member name="P:Light.Admin.Dtos.UserCreateDto.UserName">
@@ -117,6 +111,13 @@
             客户端IP
             </summary>
         </member>
+        <member name="M:Light.Admin.Services.UserService.CreateAsync(Light.Admin.Dtos.UserCreateDto)">
+            <summary>
+            创建
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
         <member name="M:Light.Admin.Services.UserService.UpdateAsync(MongoDB.Bson.ObjectId,Light.Admin.Dtos.UserCreateDto)">
             <summary>
             更新
@@ -147,6 +148,31 @@
             </summary>
             <param name="ids"></param>
             <returns></returns>
+        </member>
+        <member name="P:Light.Admin.ViewModels.UserViewModel.AuditMetadata">
+            <summary>
+            元数据
+            </summary>
+        </member>
+        <member name="P:Light.Admin.ViewModels.UserViewModel.Id">
+            <summary>
+            ObjectId
+            </summary>
+        </member>
+        <member name="P:Light.Admin.ViewModels.UserViewModel.UserName">
+            <summary>
+            用户名/账户
+            </summary>
+        </member>
+        <member name="P:Light.Admin.ViewModels.UserViewModel.PhoneNumber">
+            <summary>
+            电话
+            </summary>
+        </member>
+        <member name="P:Light.Admin.ViewModels.UserViewModel.Email">
+            <summary>
+            邮箱
+            </summary>
         </member>
     </members>
 </doc>

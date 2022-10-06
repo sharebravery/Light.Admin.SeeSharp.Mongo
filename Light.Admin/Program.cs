@@ -1,4 +1,3 @@
-using Light.Admin.Database;
 using Light.Admin.IServices;
 using Light.Admin.Services;
 using Microsoft.OpenApi.Models;
@@ -8,15 +7,22 @@ using System.Text.Json;
 using Light.Admin.Mongo.Extensions;
 using LightForApiDotNet5.Tools;
 using Light.Admin.Mongo.Filters;
+using Light.Admin.Models;
+using AspNetCore.Identity.Mongo;
+using Microsoft.Extensions.Options;
+using AspNetCore.Identity.Mongo.Model;
+using MongoDB.Bson;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.Configure<MongoDBSettings>(
+// builder.Configuration.GetSection("SiteStoreDatabase"));
 
-builder.Services.Configure<MongoDBSettings>(
- builder.Configuration.GetSection("SiteStoreDatabase"));
+var CONNECTION_STRING = builder.Configuration.GetConnectionString("Mongo");
 
-builder.Services.AddSingleton<IMongoDBContext, MongoDBContext>();
 builder.Services.AddSingleton<IUserService, UserService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -40,6 +46,7 @@ builder.Services.AddMvc(options =>
 });
 
 builder.Services.AddObjectIdBinders(); // support query can use ObjectId
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -65,6 +72,31 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddIdentityMongoDbProvider<User, Role, ObjectId>(identity =>
+{
+    // other options
+    identity.Password.RequireDigit = false;
+    identity.Password.RequiredLength = 6;
+    identity.Password.RequireNonAlphanumeric = false;
+    identity.Password.RequireUppercase = false;
+    identity.Password.RequireLowercase = false;
+
+    // Lockout settings
+    identity.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+    identity.Lockout.MaxFailedAccessAttempts = 10;
+
+    // ApplicationUser settings
+    identity.User.RequireUniqueEmail = true;
+    identity.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.-_";
+},
+   mongo =>
+   {
+       mongo.ConnectionString = CONNECTION_STRING;
+       // other options
+   });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -74,7 +106,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
 
 app.MapControllers();
 

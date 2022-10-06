@@ -1,9 +1,8 @@
-﻿namespace Light.Admin.Database
-{
-    public class MongoDBSettings
-    {
-        public string ConnectionString { get; set; } = null!;
+﻿using MongoDB.Driver;
 
-        public string DatabaseName { get; set; } = null!;
+namespace Light.Admin.Database
+{
+    public class MongoDbSettings : MongoDatabaseSettings
+    {
     }
 }

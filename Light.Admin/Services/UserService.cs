@@ -5,48 +5,34 @@ using Light.Admin.IServices;
 using Light.Admin.Models;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Linq;
-using System.Threading;
-using System.Transactions;
 
 namespace Light.Admin.Services
 {
     public class UserService : IUserService
     {
-        private readonly IMongoDBContext db;
-        protected IMongoCollection<User> userCollection;
         private readonly IMapper mapper;
-        private readonly UserManager<User> userManager;
+        readonly IMongoCollection<User> userCollection;
 
-        public UserService(IMongoDBContext db, IMapper mapper)
+        public UserService(IMapper mapper, IMongoCollection<User> userCollection)
         {
-            this.db = db;
-            userCollection = db.GetCollection<User>(typeof(User).Name);
+            this.userCollection = userCollection;
             this.mapper = mapper;
-            this.userManager = userManager;
         }
 
+        /// <summary>
+        /// 创建
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task CreateAsync(UserCreateDto dto)
         {
             var user = mapper.Map<User>(dto);
             await userCollection.InsertOneAsync(user);
 
-            //var user = new User
-            //{
-            //    UserName = dto.UserName,
-            //    PhoneNumber = dto.PhoneNumber,
-            //    Email = dto.Email
-            //};
-            //if (string.IsNullOrWhiteSpace(dto.Password))
-            //    await userManager.CreateAsync(user,
-            //        new string(user.PhoneNumber.TakeLast(Math.Min(user.PhoneNumber.Length, 6)).ToArray()));
-            //else
-            //    await userManager.CreateAsync(user, dto.Password);
-
         }
+
         /// <summary>
         /// 更新
         /// </summary>

@@ -2,8 +2,7 @@
 
 namespace Light.Admin.Database
 {
-    public interface IMongoDBContext
+    public interface IMongoDbContext : IMongoDatabase
     {
-        IMongoCollection<T> GetCollection<T>(string? name);
     }
 }

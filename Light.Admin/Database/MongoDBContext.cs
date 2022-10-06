@@ -1,24 +1,44 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Light.Admin.Database
 {
-    public class MongoDBContext : IMongoDBContext
+    public class MongoDbContext : MongoDatabaseBase
     {
-        private IMongoDatabase _db { get; set; }
-        private MongoClient _mongoClient { get; set; }
-        public IClientSessionHandle Session { get; set; }
-        public MongoDBContext(IOptions<MongoDBSettings> configuration)
-        {
-            _mongoClient = new MongoClient(configuration.Value.ConnectionString);
+        public override IMongoClient Client => throw new NotImplementedException();
 
-            _db = _mongoClient.GetDatabase(configuration.Value.DatabaseName);
-        }
-        public IMongoCollection<T> GetCollection<T>(string name)
+        public override DatabaseNamespace DatabaseNamespace => throw new NotImplementedException();
+
+        public override MongoDatabaseSettings Settings => throw new NotImplementedException();
+
+        public override Task CreateCollectionAsync(string name, CreateCollectionOptions options = null, CancellationToken cancellationToken = default)
         {
-            return _db.GetCollection<T>(name);
+            throw new NotImplementedException();
         }
 
+        public override Task DropCollectionAsync(string name, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IMongoCollection<TDocument> GetCollection<TDocument>(string name, MongoCollectionSettings settings = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<IAsyncCursor<BsonDocument>> ListCollectionsAsync(ListCollectionsOptions options = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task RenameCollectionAsync(string oldName, string newName, RenameCollectionOptions options = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<TResult> RunCommandAsync<TResult>(Command<TResult> command, ReadPreference readPreference = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
