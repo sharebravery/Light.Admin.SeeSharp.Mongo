@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "1qkGxmum2bJPSd0En/3cQ97ruWyQ+T5ytPFTaAL4UpU=",
-  "Source": "Light.Admin",
-  "BasePath": "_content/Light.Admin",
+  "Hash": "yWYXrGSP6pyuMNjqIruBntgH7slFc+v1xvqvWvIiLUc=",
+  "Source": "Light.Admin.Mongo",
+  "BasePath": "_content/Light.Admin.Mongo",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

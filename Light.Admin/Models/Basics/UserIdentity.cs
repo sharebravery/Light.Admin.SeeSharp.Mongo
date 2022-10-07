@@ -1,4 +1,4 @@
-﻿namespace Light.Admin.Models.Basics
+﻿namespace Light.Admin.Mongo.Basics
 {
     //
     // 摘要:

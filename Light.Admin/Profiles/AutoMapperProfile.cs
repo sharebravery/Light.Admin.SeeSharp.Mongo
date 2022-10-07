@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Light.Admin.Dtos;
-using Light.Admin.Models;
+using Light.Admin.Mongo;
 
 namespace Light.Admin.Profiles
 {

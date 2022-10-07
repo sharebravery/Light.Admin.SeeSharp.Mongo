@@ -1,8 +1,10 @@
-﻿using AspNetCore.Identity.Mongo.Model;
+﻿using Microsoft.AspNetCore.Identity;
+using MongoDB.Bson;
 
-namespace Light.Admin.Models
+namespace Light.Admin.Mongo
 {
-    public class Role : MongoRole
+    public class Role : IdentityRole<ObjectId>
     {
+
     }
 }

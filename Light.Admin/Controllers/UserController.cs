@@ -2,7 +2,7 @@
 using Light.Admin.Database;
 using Light.Admin.Dtos;
 using Light.Admin.IServices;
-using Light.Admin.Models;
+using Light.Admin.Mongo;
 using Light.Admin.Services;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -13,25 +13,19 @@ using MongoDB.Driver;
 
 namespace Light.Admin.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]/[action]")]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
-        private readonly UserManager<User> userManager;
-        private readonly IHttpContextAccessor accessor;
 
 
         public UserController(
-            IUserService userService,
-            UserManager<User> userManager,
-            IHttpContextAccessor accessor
+            IUserService userService
             )
         {
             this.userService = userService;
-            this.userManager = userManager;
-            this.accessor = accessor;
         }
 
 
@@ -41,37 +35,9 @@ namespace Light.Admin.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IdentityResult> Create(UserCreateDto dto)
+        public async Task Create(UserCreateDto dto)
         {
-            var user = new User
-            {
-                UserName = dto.UserName,
-                PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email,
-                //IP = ip
-            };
-
-            ModelState.ToString();
-
-            IdentityResult? result;
-
-            if (string.IsNullOrWhiteSpace(dto.Password))
-                result = await userManager.CreateAsync(user,
-                    new string(user.PhoneNumber.TakeLast(Math.Min(user.PhoneNumber.Length, 6)).ToArray()));
-            else
-                result = await userManager.CreateAsync(user, dto.Password);
-
-            if (result.Succeeded == false)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-
-            }
-
-
-            return result;
+            await userService.CreateAsync(dto);
         }
 
         /// <summary>
@@ -104,6 +70,7 @@ namespace Light.Admin.Controllers
         /// <param name="name"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserViewModel>>> Find(string? userName, string? name, string? phoneNumber)
         {

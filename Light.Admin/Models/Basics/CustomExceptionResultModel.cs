@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Light.Admin.Models.Basics
+namespace Light.Admin.Mongo.Basics
 {
     public class CustomExceptionResultModel : BaseResultModel
     {

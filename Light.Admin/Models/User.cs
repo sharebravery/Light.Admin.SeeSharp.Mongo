@@ -2,12 +2,11 @@
 using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 using Light.Admin.Interfaces;
-using Light.Admin.Models.Basics;
-using AspNetCore.Identity.Mongo.Model;
+using Light.Admin.Mongo.Basics;
 
-namespace Light.Admin.Models
+namespace Light.Admin.Mongo
 {
-    public class User : MongoUser
+    public class User : IdentityUser<ObjectId>
     {
         /// <summary>
         ///  元数据

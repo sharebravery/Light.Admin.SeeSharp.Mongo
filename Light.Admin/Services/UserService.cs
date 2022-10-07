@@ -2,12 +2,14 @@
 using Light.Admin.Database;
 using Light.Admin.Dtos;
 using Light.Admin.IServices;
-using Light.Admin.Models;
+using Light.Admin.Mongo;
+using Light.Admin.Mongo.Utils;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Runtime.Intrinsics.Arm;
 
 namespace Light.Admin.Services
 {
@@ -15,11 +17,14 @@ namespace Light.Admin.Services
     {
         private readonly IMapper mapper;
         readonly IMongoCollection<User> userCollection;
+        private readonly IMongoDbContext db;
 
-        public UserService(IMapper mapper, IMongoCollection<User> userCollection)
+
+        public UserService(IMapper mapper, IMongoDbContext db)
         {
-            this.userCollection = userCollection;
+            this.userCollection = db.GetCollection<User>(nameof(User));
             this.mapper = mapper;
+            this.db = db;
         }
 
         /// <summary>
@@ -30,6 +35,9 @@ namespace Light.Admin.Services
         public async Task CreateAsync(UserCreateDto dto)
         {
             var user = mapper.Map<User>(dto);
+
+            user.PasswordHash = Hash.Sha256(dto.Password);
+
             await userCollection.InsertOneAsync(user);
         }
 

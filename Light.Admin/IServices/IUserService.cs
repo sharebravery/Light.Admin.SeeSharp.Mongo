@@ -1,5 +1,5 @@
 ﻿using Light.Admin.Dtos;
-using Light.Admin.Models;
+using Light.Admin.Mongo;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

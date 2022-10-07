@@ -1,4 +1,4 @@
-﻿using Light.Admin.Models.Basics;
+﻿using Light.Admin.Mongo.Basics;
 
 namespace Light.Admin.Interfaces
 {

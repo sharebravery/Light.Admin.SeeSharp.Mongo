@@ -7,22 +7,61 @@ using System.Text.Json;
 using Light.Admin.Mongo.Extensions;
 using LightForApiDotNet5.Tools;
 using Light.Admin.Mongo.Filters;
-using Light.Admin.Models;
-using AspNetCore.Identity.Mongo;
+using Light.Admin.Mongo;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Light.Admin.Mongo.Basics;
+using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
+using System.Text;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Light.Admin.Database;
+using Light.Admin.Mongo.Services;
+using Light.Admin.Mongo.IServices;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//builder.Services.Configure<MongoDBSettings>(
-// builder.Configuration.GetSection("SiteStoreDatabase"));
+builder.Services.Configure<DefaultDbSettings>(
+ builder.Configuration.GetSection("SiteStoreDatabase"));
 
-var CONNECTION_STRING = builder.Configuration.GetConnectionString("Mongo");
+// jwt 认证
+JwtSettings jwtSettings = new JwtSettings();
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
 
+//注册服务
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true, //是否验证Issuer
+        ValidIssuer = jwtSettings.Issuer, //发行人Issuer
+        ValidateAudience = true, //是否验证Audience
+        ValidAudience = jwtSettings.Audience, //订阅人Audience
+        ValidateIssuerSigningKey = true, //是否验证SecurityKey
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)), //SecurityKey
+        ValidateLifetime = true, //是否验证失效时间
+        ClockSkew = TimeSpan.FromSeconds(30), //过期时间容错值，解决服务器端时间不同步问题（秒）
+        RequireExpirationTime = true,
+    };
+}).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
+});
+
+
+
+
+builder.Services.AddSingleton<IMongoDbContext, MongoDbContext>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IAccountService, AccountService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -53,6 +92,27 @@ builder.Services.AddSwaggerGen(c =>
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
     c.OrderActionsBy(o => o.RelativePath); // 对action的名称进行排序
+
+
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT授权(数据将在请求头中进行传输) 在下方输入Bearer {token} 即可，注意两者之间有空格",
+        Name = "Authorization",//jwt默认的参数名称
+        In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
+        Type = SecuritySchemeType.ApiKey
+    });
+    //认证方式，此方式为全局添加
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    { new OpenApiSecurityScheme
+                    {
+                    Reference = new OpenApiReference()
+                    {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                    }
+                    }, Array.Empty<string>() }
+                    });
 });
 
 builder.Services.AddObjectIdSwagger();
@@ -67,52 +127,18 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddIdentityMongoDbProvider<User, Role, ObjectId>(identity =>
-{
-    // other options
-    identity.Password.RequireDigit = false;
-    identity.Password.RequiredLength = 6;
-    identity.Password.RequireNonAlphanumeric = false;
-    identity.Password.RequireUppercase = false;
-    identity.Password.RequireLowercase = false;
 
-    // Lockout settings
-    identity.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-    identity.Lockout.MaxFailedAccessAttempts = 10;
-
-    // ApplicationUser settings
-    identity.User.RequireUniqueEmail = true;
-    identity.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@.-_";
-},
-   mongo =>
-   {
-       mongo.ConnectionString = CONNECTION_STRING;
-       // other options
-   });
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-        options => builder.Configuration.Bind("JwtSettings", options))
-    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-        options => builder.Configuration.Bind("CookieSettings", options));
-
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});
 
 builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ApiResultFilterAttribute>(); // 统一返回值（包含了对422模型校验错误的处理）
     options.Filters.Add<CustomExceptionAttribute>(); // 统一异常处理
+    options.Filters.Add(new AuthorizeFilter());
 });
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-//builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

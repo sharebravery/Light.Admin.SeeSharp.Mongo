@@ -2,7 +2,7 @@
 
 namespace Light.Admin.Database
 {
-    public class MongoDbSettings : MongoDatabaseSettings
+    public class MongoDbSettings : DefaultDbSettings
     {
     }
 }

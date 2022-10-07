@@ -1,4 +1,4 @@
-﻿using Light.Admin.Models.Basics;
+﻿using Light.Admin.Mongo.Basics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;

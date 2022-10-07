@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Light.Admin.Models.Basics
+namespace Light.Admin.Mongo.Basics
 {
     //
     // Summary:

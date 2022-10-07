@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
-namespace Light.Admin.Models.Basics
+namespace Light.Admin.Mongo.Basics
 {
     //public class ValidationFailedResult : ObjectResult
     //{

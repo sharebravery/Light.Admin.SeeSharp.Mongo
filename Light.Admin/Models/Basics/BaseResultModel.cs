@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Light.Admin.Models.Basics
+namespace Light.Admin.Mongo.Basics
 {
     public class BaseResultModel
     {
