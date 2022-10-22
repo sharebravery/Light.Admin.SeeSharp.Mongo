@@ -2246,11 +2246,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj",
-      "projectName": "Light.Admin",
-      "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj",
+      "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
+      "projectName": "Light.Admin.Mongo",
+      "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\obj\\",
+      "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

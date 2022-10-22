@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U76+T9DrAF25FOdzqwqBu3wd6jTb1A99k4K+jdwhFVolTe+oyNt8EbcbSrJDgPzMqt6A3YHn10uH03I8QXSz8A==",
+  "dgSpecHash": "a6Mmu1Cp80gCqqkfmap9gBn8XdEDEZDXAkq62iqS2+dCpk9WuKniOFp1Jp57dmU62hSptIc4DQqZCJ1FILwfkA==",
   "success": true,
-  "projectFilePath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp\\Light.Admin\\Light.Admin.csproj",
+  "projectFilePath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

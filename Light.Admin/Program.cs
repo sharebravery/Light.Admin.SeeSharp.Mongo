@@ -7,22 +7,15 @@ using System.Text.Json;
 using Light.Admin.Mongo.Extensions;
 using LightForApiDotNet5.Tools;
 using Light.Admin.Mongo.Filters;
-using Light.Admin.Mongo;
-using MongoDB.Bson;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Light.Admin.Mongo.Basics;
 using Microsoft.IdentityModel.Tokens;
-using System.Configuration;
 using System.Text;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Light.Admin.Database;
 using Light.Admin.Mongo.Services;
 using Light.Admin.Mongo.IServices;
-using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DefaultDbSettings>(
  builder.Configuration.GetSection("SiteStoreDatabase"));
 
-// jwt 认证
+// jwt 认证 配置
 JwtSettings jwtSettings = new JwtSettings();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
@@ -55,13 +48,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 {
 });
 
-
-
-
 builder.Services.AddSingleton<IMongoDbContext, MongoDbContext>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -76,7 +66,6 @@ builder.Services.AddControllers()
     });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 
 
 builder.Services.AddObjectIdBinders(); // support query can use ObjectId
@@ -94,25 +83,39 @@ builder.Services.AddSwaggerGen(c =>
     c.OrderActionsBy(o => o.RelativePath); // 对action的名称进行排序
 
 
-
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    //Bearer 的scheme定义
+    var securityScheme = new OpenApiSecurityScheme()
     {
-        Description = "JWT授权(数据将在请求头中进行传输) 在下方输入Bearer {token} 即可，注意两者之间有空格",
-        Name = "Authorization",//jwt默认的参数名称
-        In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
-        Type = SecuritySchemeType.ApiKey
-    });
-    //认证方式，此方式为全局添加
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { new OpenApiSecurityScheme
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+        Name = "Authorization",
+        //参数添加在头部
+        In = ParameterLocation.Header,
+        //使用Authorize头部
+        Type = SecuritySchemeType.Http,
+        //内容为以 bearer开头
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    };
+
+    //把所有方法配置为增加bearer头部信息
+    var securityRequirement = new OpenApiSecurityRequirement
+                {
                     {
-                    Reference = new OpenApiReference()
-                    {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "bearerAuth"
+                                }
+                            },
+                            new string[] {}
                     }
-                    }, Array.Empty<string>() }
-                    });
+                };
+
+    //注册到swagger中
+    c.AddSecurityDefinition("bearerAuth", securityScheme);
+    c.AddSecurityRequirement(securityRequirement);
 });
 
 builder.Services.AddObjectIdSwagger();

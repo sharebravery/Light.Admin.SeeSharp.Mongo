@@ -14,10 +14,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Xml.Linq;
@@ -29,43 +31,32 @@ namespace Light.Admin.Controllers
     [Route("api/[controller]/[action]")]
     public class AccountController : ControllerBase
     {
-        //private readonly IDefaultDbContext db;
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly JwtSettings jwtSettings;
         private readonly IAccountService accountService;
 
         public AccountController(
-            IHttpContextAccessor httpContextAccessor,
-            IAccountService accountService,
-           IOptions<JwtSettings> options
+            IAccountService accountService
             )
         {
-            this.httpContextAccessor = httpContextAccessor;
             this.accountService = accountService;
-            this.jwtSettings = options.Value;
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult<string> GetTest()
-        {
-            return "Test Authorize";
-        }
-
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public async Task<string> SignIn(LoginViewModel model)
+        public async Task SignIn(LoginViewModel model)
         {
-            var result = SignInResult.Failed;
 
             var user = await accountService.ValidateUser(model.Account, model.Password);
 
             if (user != null)
             {
                 var token = await accountService.GetToken(user);
-                return token;
             }
-            return result.ToString();
+
         }
     }
 }

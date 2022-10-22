@@ -74,15 +74,10 @@ namespace Light.Admin.Mongo.Services
             var claims = new Claim[]
            {
                         new Claim(ClaimTypes.Name,user.UserName),
-                        new Claim(ClaimTypes.Email,user.Email)
              };
 
-            //var principal = new ClaimsPrincipal(new ClaimsIdentity[]
-            //    {
-            //        new ClaimsIdentity(claims, "Default")
-            //    });
-
-            //await httpContextAccessor.HttpContext.SignInAsync(principal);
+            if (user.Email != null) claims.Append(new Claim(ClaimTypes.Email, user.Email));
+            if (user.PhoneNumber != null) claims.Append(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
 
             // 2. 从 appsettings.json 中读取SecretKey,生成对称秘钥
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
@@ -100,6 +95,10 @@ namespace Light.Admin.Mongo.Services
 
             // 6. 将token变为string
             string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+
+            // 响应头携带Token
+            httpContextAccessor.HttpContext.Response.Headers.Add("x-access-token", token);
+            httpContextAccessor.HttpContext.Response.Headers.Add("x-access-token-expires-in", jwtSettings.ExpireSeconds.ToString());
             return token;
         }
     }

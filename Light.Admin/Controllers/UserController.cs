@@ -13,7 +13,6 @@ using MongoDB.Driver;
 
 namespace Light.Admin.Controllers
 {
-    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
@@ -70,7 +69,6 @@ namespace Light.Admin.Controllers
         /// <param name="name"></param>
         /// <param name="phoneNumber"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserViewModel>>> Find(string? userName, string? name, string? phoneNumber)
         {
