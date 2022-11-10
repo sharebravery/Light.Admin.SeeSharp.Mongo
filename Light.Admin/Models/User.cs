@@ -14,6 +14,16 @@ namespace Light.Admin.Mongo
         public AuditMetadata AuditMetadata { get; set; }
 
         /// <summary>
+        /// 用户名(显示)
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 角色
+        /// </summary>
+        public List<Role> Roles { get; set; }
+
+        /// <summary>
         /// 加密盐
         /// </summary>
         public string Salt { get; set; }

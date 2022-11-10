@@ -5,11 +5,15 @@ using Light.Admin.Mongo.Basics;
 using Light.Admin.Mongo.IServices;
 using Light.Admin.Mongo.Utils;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 
 namespace Light.Admin.Mongo.Services
@@ -21,8 +25,6 @@ namespace Light.Admin.Mongo.Services
         private readonly IMongoDbContext db;
         private readonly JwtSettings jwtSettings;
         private readonly IHttpContextAccessor httpContextAccessor;
-
-
 
         public AccountService(
             IMapper mapper,
@@ -74,6 +76,8 @@ namespace Light.Admin.Mongo.Services
             var claims = new Claim[]
            {
                         new Claim(ClaimTypes.Name,user.UserName),
+                        new Claim("userId",user.Id.ToString()),
+                        new Claim(ClaimTypes.Role,user.Roles.ToJson()),
              };
 
             if (user.Email != null) claims.Append(new Claim(ClaimTypes.Email, user.Email));
@@ -96,8 +100,17 @@ namespace Light.Admin.Mongo.Services
             // 6. 将token变为string
             string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
-            // 响应头携带Token
-            httpContextAccessor.HttpContext.Response.Headers.Add("x-access-token", token);
+            // cooki login
+            var identity = new ClaimsIdentity(claims, "TestLogin");
+            var userPrincipal = new ClaimsPrincipal(identity);
+
+            await httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties
+            {
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
+                IsPersistent = false,
+                AllowRefresh = false
+            });
+
             httpContextAccessor.HttpContext.Response.Headers.Add("x-access-token-expires-in", jwtSettings.ExpireSeconds.ToString());
             return token;
         }

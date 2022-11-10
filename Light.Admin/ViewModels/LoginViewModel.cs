@@ -8,7 +8,7 @@ namespace Light.Admin.ViewModels
         /// 账户
         /// </summary>
         [Required]
-        public string Account { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// 密码

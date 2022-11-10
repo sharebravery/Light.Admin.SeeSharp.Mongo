@@ -12,6 +12,7 @@ namespace Light.Admin.ViewModels
             UserName = user.UserName;
             PhoneNumber = user.PhoneNumber;
             Email = user.Email;
+            Name = user.Name;
         }
 
         /// <summary>
@@ -20,13 +21,29 @@ namespace Light.Admin.ViewModels
         public AuditMetadata AuditMetadata { get; set; }
 
         /// <summary>
-        /// ObjectId
+        /// 用户ID
         /// </summary>
         public ObjectId Id { get; set; }
+
+        /// <summary>
+        /// 账户ID
+        /// </summary>
+        public ObjectId AccountId { get => Id; }
+
         /// <summary>
         /// 用户名/账户
         /// </summary>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// 用户名(显示)
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 角色
+        /// </summary>
+        public  List<Role> Roles { get; set; }
 
         /// <summary>
         /// 电话
