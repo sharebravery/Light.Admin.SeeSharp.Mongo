@@ -21,7 +21,7 @@ namespace Light.Admin.Mongo
         /// <summary>
         /// 角色
         /// </summary>
-        public List<Role> Roles { get; set; }
+        public List<string> Roles { get; set; }
 
         /// <summary>
         /// 加密盐

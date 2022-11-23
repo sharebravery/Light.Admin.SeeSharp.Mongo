@@ -130,6 +130,16 @@ builder.Services.AddCors(options =>
     });
 });
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("MyAllowSpecificOrigins", builder =>
+//    {
+//        builder.AllowAnyMethod()
+//                     .SetIsOriginAllowed(_ => true)
+//                     .AllowAnyHeader()
+//                     .AllowCredentials();
+//    });
+//});
 
 
 builder.Services.AddMvc(options =>
@@ -150,10 +160,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

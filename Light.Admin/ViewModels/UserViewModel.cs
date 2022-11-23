@@ -13,6 +13,7 @@ namespace Light.Admin.ViewModels
             PhoneNumber = user.PhoneNumber;
             Email = user.Email;
             Name = user.Name;
+            Roles = user.Roles;
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Light.Admin.ViewModels
         /// <summary>
         /// 角色
         /// </summary>
-        public  List<Role> Roles { get; set; }
+        public  List<string> Roles { get; set; }
 
         /// <summary>
         /// 电话

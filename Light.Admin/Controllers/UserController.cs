@@ -1,19 +1,14 @@
-﻿using AutoMapper;
-using Light.Admin.Database;
-using Light.Admin.Dtos;
+﻿using Light.Admin.Dtos;
 using Light.Admin.IServices;
-using Light.Admin.Mongo;
-using Light.Admin.Services;
 using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using MongoDB.Driver;
 
 namespace Light.Admin.Controllers
 {
     [ApiController]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]/[action]")]
     public class UserController : ControllerBase
     {
