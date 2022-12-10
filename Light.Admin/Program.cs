@@ -1,6 +1,7 @@
 using Light.Admin.IServices;
 using Light.Admin.Services;
-using Microsoft.OpenApi.Models;
+
+//using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Text.Json;
@@ -17,7 +18,7 @@ using Light.Admin.Database;
 using Light.Admin.Mongo.Services;
 using Light.Admin.Mongo.IServices;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args).Inject(); ;
 
 // Add services to the container.
 builder.Services.Configure<DefaultDbSettings>(
@@ -55,7 +56,7 @@ builder.Services.AddSingleton<IAccountService, AccountService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers()
+builder.Services.AddControllers().AddInject()
 .AddJsonOptions(
     options =>
     {
@@ -67,56 +68,9 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-
 builder.Services.AddObjectIdBinders(); // support query can use ObjectId
 
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Docs", Version = "v1" });
-
-    // 使用反射获取xml文件。并构造出文件的路径
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-
-    c.OrderActionsBy(o => o.RelativePath); // 对action的名称进行排序
-
-
-    //Bearer 的scheme定义
-    var securityScheme = new OpenApiSecurityScheme()
-    {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-        Name = "Authorization",
-        //参数添加在头部
-        In = ParameterLocation.Header,
-        //使用Authorize头部
-        Type = SecuritySchemeType.Http,
-        //内容为以 bearer开头
-        Scheme = "bearer",
-        BearerFormat = "JWT"
-    };
-
-    //把所有方法配置为增加bearer头部信息
-    var securityRequirement = new OpenApiSecurityRequirement
-                {
-                    {
-                            new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "bearerAuth"
-                                }
-                            },
-                            new string[] {}
-                    }
-                };
-
-    //注册到swagger中
-    c.AddSecurityDefinition("bearerAuth", securityScheme);
-    c.AddSecurityRequirement(securityRequirement);
-});
 
 builder.Services.AddObjectIdSwagger();
 
@@ -130,17 +84,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("MyAllowSpecificOrigins", builder =>
-//    {
-//        builder.AllowAnyMethod()
-//                     .SetIsOriginAllowed(_ => true)
-//                     .AllowAnyHeader()
-//                     .AllowCredentials();
-//    });
-//});
-
+builder.Services.AddRemoteRequest();
 
 builder.Services.AddMvc(options =>
 {
@@ -149,16 +93,7 @@ builder.Services.AddMvc(options =>
     options.Filters.Add(new AuthorizeFilter());
 });
 
-
 var app = builder.Build();
-
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseCors();
 
@@ -166,7 +101,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseInject();
 
+app.MapControllers();
 
 app.Run();

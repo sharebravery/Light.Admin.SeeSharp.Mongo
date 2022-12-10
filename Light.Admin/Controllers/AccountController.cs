@@ -6,9 +6,11 @@ using Light.Admin.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Net.Http;
 
 namespace Light.Admin.Controllers
 
@@ -38,7 +40,6 @@ namespace Light.Admin.Controllers
         [HttpPost]
         public async Task<string> SignIn(LoginViewModel model)
         {
-
             var user = await accountService.ValidateUser(model.Username, model.Password);
 
             if (user == null)
@@ -51,6 +52,8 @@ namespace Light.Admin.Controllers
             // 响应头携带Token
             HttpContext.Response.Headers.Add("x-access-token", token);
 
+            HttpContext.SigninToSwagger(token);
+
             return token;
         }
 
@@ -61,13 +64,13 @@ namespace Light.Admin.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize]
-        public async Task<UserViewModel>  Me(
+        public async Task<UserViewModel> Me(
           [FromServices] IMapper mapper
       )
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId").Value;
 
-            var user = await db.GetCollection<User>(nameof(User)).Find(x => x.Id ==new ObjectId(userId)).FirstOrDefaultAsync();
+            var user = await db.GetCollection<User>(nameof(User)).Find(x => x.Id == new ObjectId(userId)).FirstOrDefaultAsync();
 
             var result = mapper.Map<UserViewModel>(user);
 
@@ -82,6 +85,7 @@ namespace Light.Admin.Controllers
         public async void SingOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.SignoutToSwagger();
         }
     }
 }

@@ -5,26 +5,24 @@ using Light.Admin.IServices;
 using Light.Admin.Mongo;
 using Light.Admin.Mongo.Utils;
 using Light.Admin.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Runtime.Intrinsics.Arm;
 
 namespace Light.Admin.Services
 {
     public class UserService : IUserService
     {
         private readonly IMapper mapper;
-        readonly IMongoCollection<User> userCollection;
+        private readonly IMongoCollection<User> userCollection;
         private readonly IMongoDbContext db;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-
-        public UserService(IMapper mapper, IMongoDbContext db)
+        public UserService(IHttpContextAccessor httpContextAccessor, IMapper mapper, IMongoDbContext db)
         {
             this.userCollection = db.GetCollection<User>(nameof(User));
             this.mapper = mapper;
             this.db = db;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -35,6 +33,10 @@ namespace Light.Admin.Services
         public async Task CreateAsync(UserCreateDto dto)
         {
             var user = mapper.Map<User>(dto);
+
+            var ipv4 = httpContextAccessor.HttpContext.GetRemoteIpAddressToIPv4();
+
+            user.IP = ipv4;
 
             user.PasswordHash = Hash.Sha256(dto.Password);
 
@@ -60,6 +62,9 @@ namespace Light.Admin.Services
             user.PhoneNumber = dto.PhoneNumber;
             user.UserName = dto.UserName;
             user.Email = dto.Email;
+
+            var ipv4 = httpContextAccessor.HttpContext.GetRemoteIpAddressToIPv4();
+            user.IP = ipv4;
 
             await userCollection.ReplaceOneAsync(x => x.Id == id, user);
 

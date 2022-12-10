@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace LightForApiDotNet5.Tools
 {
-
     public class ApiResultFilterAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
         }
+
         public override void OnResultExecuting(ResultExecutingContext context)
         {
             if (!context.ModelState.IsValid)
@@ -26,9 +26,12 @@ namespace LightForApiDotNet5.Tools
             else
             {
                 var objectResult = context.Result as ObjectResult;
-                context.Result = new OkObjectResult(new BaseResultModel(code: 200, data: objectResult == null ? null : objectResult.Value));
+
+                if (objectResult != null)
+                {
+                    context.Result = new OkObjectResult(new BaseResultModel(code: 200, data: objectResult == null ? null : objectResult.Value));
+                }
             }
         }
-
     }
 }
