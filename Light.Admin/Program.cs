@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Light.Admin.Database;
 using Light.Admin.Mongo.Services;
 using Light.Admin.Mongo.IServices;
+using IGeekFan.AspNetCore.Knife4jUI;
+using Furion.SpecificationDocument;
 
 var builder = WebApplication.CreateBuilder(args).Inject(); ;
 
@@ -100,6 +102,17 @@ app.UseCors();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+//var routePrefix = "api";    // 定义 swagger 路由地址，如果是跟目录，设置 string.Empty 即可
+
+//app.UseKnife4UI(options =>
+//{
+//    options.RoutePrefix = routePrefix;  // 配置 Knife4UI 路由地址
+//    foreach (var groupInfo in SpecificationDocumentBuilder.GetOpenApiGroups())
+//    {
+//        options.SwaggerEndpoint("/" + groupInfo.RouteTemplate, groupInfo.Title);
+//    }
+//});
 
 app.UseInject();
 

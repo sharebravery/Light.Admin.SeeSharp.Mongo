@@ -6,7 +6,7 @@ using Light.Admin.Mongo.Basics;
 
 namespace Light.Admin.Mongo
 {
-    public class User : IdentityUser<ObjectId>
+    public class User : IdentityUser<ObjectId>, IAuditMetadata
     {
         /// <summary>
         ///  元数据

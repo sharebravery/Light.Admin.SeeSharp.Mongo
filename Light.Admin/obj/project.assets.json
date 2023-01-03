@@ -59,10 +59,10 @@
           }
         }
       },
-      "Furion/4.8.2.2": {
+      "Furion/4.8.3.4": {
         "type": "package",
         "dependencies": {
-          "Furion.Extras.DependencyModel.CodeAnalysis": "4.8.2.2",
+          "Furion.Extras.DependencyModel.CodeAnalysis": "4.8.3.4",
           "MiniProfiler.AspNetCore.Mvc": "4.2.22",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -80,7 +80,7 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "Furion.Extras.DependencyModel.CodeAnalysis/4.8.2.2": {
+      "Furion.Extras.DependencyModel.CodeAnalysis/4.8.3.4": {
         "type": "package",
         "dependencies": {
           "Ben.Demystifier": "0.4.1",
@@ -102,6 +102,24 @@
           }
         }
       },
+      "Furion.Extras.ObjectMapper.Mapster/4.8.3.4": {
+        "type": "package",
+        "dependencies": {
+          "Mapster": "7.3.0",
+          "Mapster.DependencyInjection": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Furion.Extras.ObjectMapper.Mapster.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Furion.Extras.ObjectMapper.Mapster.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -113,6 +131,57 @@
           "lib/netstandard2.0/Humanizer.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "IGeekFan.AspNetCore.Knife4jUI/0.0.13": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/IGeekFan.AspNetCore.Knife4jUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/IGeekFan.AspNetCore.Knife4jUI.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Mapster/7.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Mapster.Core": "1.2.0",
+          "Microsoft.CSharp": "4.3.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Mapster.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.dll": {}
+        }
+      },
+      "Mapster.Core/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mapster.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.Core.dll": {}
+        }
+      },
+      "Mapster.DependencyInjection/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Mapster": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Mapster.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mapster.DependencyInjection.dll": {}
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.9": {
@@ -1499,7 +1568,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.1/_._": {
+          "ref/netstandard1.1/System.Reflection.Emit.dll": {
             "related": ".xml"
           }
         },
@@ -1967,15 +2036,15 @@
         "lib/netstandard2.1/DnsClient.xml"
       ]
     },
-    "Furion/4.8.2.2": {
-      "sha512": "O2QYV2dt85k1Fjkf3NWVPUkOqsgjPR0Xzi4gC3DJPreE0yppp6HMXZQ0DkmcetzhocKaXLDF7xT6sbbw9CwSwQ==",
+    "Furion/4.8.3.4": {
+      "sha512": "due5hIPZb5RLATfgrqFAd4xM3cL5rIHLS8vhk9FDXeA2LOBxXP371SWAHqVOn4R0LYTPHBfS2rs9y1ezhmbsyA==",
       "type": "package",
-      "path": "furion/4.8.2.2",
+      "path": "furion/4.8.3.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "furion.4.8.2.2.nupkg.sha512",
+        "furion.4.8.3.4.nupkg.sha512",
         "furion.nuspec",
         "icon.png",
         "lib/net5.0/Furion.dll",
@@ -1986,15 +2055,15 @@
         "lib/net7.0/Furion.xml"
       ]
     },
-    "Furion.Extras.DependencyModel.CodeAnalysis/4.8.2.2": {
-      "sha512": "DgtJKwn4br7QLfSDjJ/waFJ5D3uYI5Kxq0jfcarTkSqMqKZcsHwrAEPfKZrIpkzG2l7DLmcNyu/9CWiYyV8HDg==",
+    "Furion.Extras.DependencyModel.CodeAnalysis/4.8.3.4": {
+      "sha512": "Vma+T+bL4x6FpxOnXb9FmoC5/mTnDHHXACcrK0mlQBhdVqG33sZMCUywSM6WNZ5efdUY1GmzDMhkkVt33UGGGg==",
       "type": "package",
-      "path": "furion.extras.dependencymodel.codeanalysis/4.8.2.2",
+      "path": "furion.extras.dependencymodel.codeanalysis/4.8.3.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "furion.extras.dependencymodel.codeanalysis.4.8.2.2.nupkg.sha512",
+        "furion.extras.dependencymodel.codeanalysis.4.8.3.4.nupkg.sha512",
         "furion.extras.dependencymodel.codeanalysis.nuspec",
         "icon.png",
         "lib/net5.0/Furion.Extras.DependencyModel.CodeAnalysis.dll",
@@ -2003,6 +2072,25 @@
         "lib/net6.0/Furion.Extras.DependencyModel.CodeAnalysis.xml",
         "lib/net7.0/Furion.Extras.DependencyModel.CodeAnalysis.dll",
         "lib/net7.0/Furion.Extras.DependencyModel.CodeAnalysis.xml"
+      ]
+    },
+    "Furion.Extras.ObjectMapper.Mapster/4.8.3.4": {
+      "sha512": "JotQSc5QsKXNiWGB8N/FOie0mAiTMKe3iVwvys+coxuDNGqP09J5FRTGdegov7zywCPt78PglgvwUZ5CiYfWAA==",
+      "type": "package",
+      "path": "furion.extras.objectmapper.mapster/4.8.3.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "furion.extras.objectmapper.mapster.4.8.3.4.nupkg.sha512",
+        "furion.extras.objectmapper.mapster.nuspec",
+        "icon.png",
+        "lib/net5.0/Furion.Extras.ObjectMapper.Mapster.dll",
+        "lib/net5.0/Furion.Extras.ObjectMapper.Mapster.xml",
+        "lib/net6.0/Furion.Extras.ObjectMapper.Mapster.dll",
+        "lib/net6.0/Furion.Extras.ObjectMapper.Mapster.xml",
+        "lib/net7.0/Furion.Extras.ObjectMapper.Mapster.dll",
+        "lib/net7.0/Furion.Extras.ObjectMapper.Mapster.xml"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -2019,6 +2107,75 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "IGeekFan.AspNetCore.Knife4jUI/0.0.13": {
+      "sha512": "E5OoD0RreHvkTlTxYeNOzlKZOf5PDAHTwMGfYRKrrGkD4m4yc5qK69fs1/zZJXUA14vZWbbXfDuOIe3tH11HSQ==",
+      "type": "package",
+      "path": "igeekfan.aspnetcore.knife4jui/0.0.13",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "igeekfan.aspnetcore.knife4jui.0.0.13.nupkg.sha512",
+        "igeekfan.aspnetcore.knife4jui.nuspec",
+        "lib/net6.0/IGeekFan.AspNetCore.Knife4jUI.dll",
+        "lib/net6.0/IGeekFan.AspNetCore.Knife4jUI.pdb",
+        "lib/net6.0/IGeekFan.AspNetCore.Knife4jUI.xml",
+        "lib/net7.0/IGeekFan.AspNetCore.Knife4jUI.dll",
+        "lib/net7.0/IGeekFan.AspNetCore.Knife4jUI.pdb",
+        "lib/net7.0/IGeekFan.AspNetCore.Knife4jUI.xml",
+        "lib/netcoreapp3.1/IGeekFan.AspNetCore.Knife4jUI.dll",
+        "lib/netcoreapp3.1/IGeekFan.AspNetCore.Knife4jUI.pdb",
+        "lib/netcoreapp3.1/IGeekFan.AspNetCore.Knife4jUI.xml",
+        "lib/netstandard2.0/IGeekFan.AspNetCore.Knife4jUI.dll",
+        "lib/netstandard2.0/IGeekFan.AspNetCore.Knife4jUI.pdb",
+        "lib/netstandard2.0/IGeekFan.AspNetCore.Knife4jUI.xml"
+      ]
+    },
+    "Mapster/7.3.0": {
+      "sha512": "NrCUX/rJa5PTyo6iW4AL5dZLU9PDNlYnrJOVjgdpo5OQM9EtWH2CMHnC5sSuJWC0d0b0SnmeRrIviEem6WxtuQ==",
+      "type": "package",
+      "path": "mapster/7.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/netstandard1.3/Mapster.dll",
+        "lib/netstandard2.0/Mapster.dll",
+        "mapster.7.3.0.nupkg.sha512",
+        "mapster.nuspec"
+      ]
+    },
+    "Mapster.Core/1.2.0": {
+      "sha512": "TNdqZk2zAuBYfJF88D/3clQTOyOdqr1crU81yZQtlGa+e7FYWhJdK/buBWT+TpM3qQko9UzmzfOT4iq3JCs/ZA==",
+      "type": "package",
+      "path": "mapster.core/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net40/Mapster.Core.dll",
+        "lib/net45/Mapster.Core.dll",
+        "lib/netstandard1.3/Mapster.Core.dll",
+        "lib/netstandard2.0/Mapster.Core.dll",
+        "mapster.core.1.2.0.nupkg.sha512",
+        "mapster.core.nuspec"
+      ]
+    },
+    "Mapster.DependencyInjection/1.0.0": {
+      "sha512": "nNSGrgu5GirZ8nmuFXHGct+GwXjmbAAb+UqBl3Bwx/vbkCOypuvOziC+wTaNEjz/OE6LMg8yMCZzOtl59Lxw9Q==",
+      "type": "package",
+      "path": "mapster.dependencyinjection/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net40/Mapster.DependencyInjection.dll",
+        "lib/net45/Mapster.DependencyInjection.dll",
+        "lib/netstandard1.3/Mapster.DependencyInjection.dll",
+        "lib/netstandard2.0/Mapster.DependencyInjection.dll",
+        "mapster.dependencyinjection.1.0.0.nupkg.sha512",
+        "mapster.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.9": {
@@ -6316,7 +6473,9 @@
     "net6.0": [
       "AutoMapper >= 12.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
-      "Furion >= 4.8.2.2",
+      "Furion >= 4.8.3.4",
+      "Furion.Extras.ObjectMapper.Mapster >= 4.8.3.4",
+      "IGeekFan.AspNetCore.Knife4jUI >= 0.0.13",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.9",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.9",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.9",
@@ -6332,11 +6491,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
+      "projectUniqueName": "E:\\Volunteer\\StartingPoint\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
       "projectName": "Light.Admin.Mongo",
-      "projectPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
+      "projectPath": "E:\\Volunteer\\StartingPoint\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\Light.Admin.Mongo.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\Volunteer\\Calculus\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\obj\\",
+      "outputPath": "E:\\Volunteer\\StartingPoint\\Light.Admin.SeeSharp.Mongo\\Light.Admin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6376,7 +6535,15 @@
           },
           "Furion": {
             "target": "Package",
-            "version": "[4.8.2.2, )"
+            "version": "[4.8.3.4, )"
+          },
+          "Furion.Extras.ObjectMapper.Mapster": {
+            "target": "Package",
+            "version": "[4.8.3.4, )"
+          },
+          "IGeekFan.AspNetCore.Knife4jUI": {
+            "target": "Package",
+            "version": "[0.0.13, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

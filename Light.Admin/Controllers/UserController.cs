@@ -14,14 +14,12 @@ namespace Light.Admin.Controllers
     {
         private readonly IUserService userService;
 
-
         public UserController(
             IUserService userService
             )
         {
             this.userService = userService;
         }
-
 
         /// <summary>
         /// 新增用户
@@ -46,11 +44,11 @@ namespace Light.Admin.Controllers
             await userService.UpdateAsync(id, dto);
         }
 
-        ///// <summary>
-        ///// 批量删除
-        ///// </summary>
-        ///// <param name="ids"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         [HttpPut]
         public async Task Delete(ObjectId[] ids)
         {
@@ -70,17 +68,15 @@ namespace Light.Admin.Controllers
             return Ok(await userService.FindAsync(userName, name, phoneNumber));
         }
 
-        ///// <summary>
-        ///// 单个查找
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// 单个查找
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<UserViewModel> FindOne(ObjectId id)
         {
             return await userService.FindOneAsync(id);
         }
-
-
     }
 }

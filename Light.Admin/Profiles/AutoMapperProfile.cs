@@ -11,6 +11,5 @@ namespace Light.Admin.Profiles
             CreateMap<UserCreateDto, User>().ReverseMap();
             //CreateMap<UserDto, User>().ReverseMap();
         }
-
     }
 }

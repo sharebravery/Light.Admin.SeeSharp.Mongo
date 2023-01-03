@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Furion.DatabaseAccessor;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Light.Admin.Mongo.Basics
 {
@@ -6,7 +7,7 @@ namespace Light.Admin.Mongo.Basics
     // Summary:
     //     文档元数据
     [ComplexType]
-    public class AuditMetadata
+    public class AuditMetadata : Entity
     {
         //
         // 摘要:
